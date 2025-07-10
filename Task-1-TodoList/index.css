@@ -1,0 +1,89 @@
+body{
+    background-color: #F4F4F3;
+}
+.container{
+    width: 600px;
+    margin: 40px auto 0 auto;
+}
+
+h1{
+    color: #0d5477;
+}
+.input-field{
+    display: flex;
+    height: 40px;
+    gap: 5px;
+}
+
+input{
+    flex-grow: 1;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #2F81AB;
+    padding: 5px 10px;
+}
+.delete-task{
+    border-style: solid;
+    border-radius: 5px;
+    border-color: red;
+    width: 60px;
+    height: 50px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+}
+.delete-task:hover{
+    background-color: rgb(245, 123, 123);
+    border-color: rgb(245, 123, 123);
+    color: white;
+}
+
+.add-task{
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #2F81AB;
+    width: 60px;
+    background-color: white;
+    color: #0d5477;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.add-task:hover{
+    background-color: #2F81AB;
+    color: white;
+}
+
+.add-task:active{
+    background-color: #51aad6;
+    color: white;
+    border-color: #51aad6;
+}
+.task-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-detail{
+    flex-grow: 1;
+    background-color: #2F81AB;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.task-detail:hover{
+    background-color: #0d5477;
+}
+
+.task-detail:active{
+    background-color: #51aad6;
+}
