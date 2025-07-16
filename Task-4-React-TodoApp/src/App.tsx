@@ -8,7 +8,6 @@ import InputField from "./components/InputField";
 function App() {
 	const [todos, setTodos] = useState<Todo[]>([]);
 	const [filter, setFilter] = useState(1);
-	const totalTodos = todos;
 	const activeTodos = todos.filter((t) => !t.isFinished);
 	const completedTodos = todos.filter((t) => t.isFinished);
 
@@ -26,7 +25,7 @@ function App() {
 			<InputField setTodos={setTodos} />
 			<div className="summary-container">
 				<div className="total-tasks summary">
-					<p className="count">{totalTodos.length}</p>
+					<p className="count">{todos.length}</p>
 					<p>Total Todos</p>
 				</div>
 				<div className="active-tasks summary">
@@ -40,7 +39,7 @@ function App() {
 			</div>
 			<div className="filter">
 				<button onClick={() => setFilter(1)} className={filter === 1 ? "all" : "disable-filter"}>
-					All {totalTodos.length}
+					All {todos.length}
 				</button>
 				<button onClick={() => setFilter(2)} className={filter === 2 ? "active" : "disable-filter"}>
 					Active {activeTodos.length}
@@ -50,7 +49,7 @@ function App() {
 				</button>
 			</div>
 			{(filter === 1) ? 
-                totalTodos.map((todo) => <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />) : (filter === 2) ? 
+                todos.map((todo) => <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />) : (filter === 2) ? 
                 activeTodos.map((todo) => <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />) : 
                 completedTodos.map((todo) => <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />)}
 		</div>
