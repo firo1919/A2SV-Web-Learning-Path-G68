@@ -1,6 +1,6 @@
 import { Poppins } from "next/font/google";
-import JobListCard from "./components/JobListCard";
-import JobPostService from "./services/jobPostService";
+import JobListCard from "../components/JobListCard";
+import JobPostService from "../services/jobPostService";
 
 const poppins = Poppins({
 	subsets: ["latin"],

@@ -9,7 +9,7 @@ interface Props {
 
 function JobListCard({ jobpost }: Props) {
 	return (
-		<Link href={`/${jobpost.id}`} className="flex p-6 rounded-[30px] border border-[#D6DDEB]">
+		<Link href={`/joblist/${jobpost.id}`} className="flex p-6 rounded-[30px] border border-[#D6DDEB]">
 			<div className="w-[66px] mr-6 relative shrink-0">
 				<Image src={JobListImage} fill alt="company image" className=" object-contain object-top" />
 			</div>
@@ -20,7 +20,7 @@ function JobListCard({ jobpost }: Props) {
 					<div className="mx-2 w-1 h-1 bg-[#7C8493] rounded-full"></div>
 					<p>{jobpost.about.location}</p>
 				</div>
-				<p className="text-[16px]">{jobpost.description}</p>
+				<p className="text-[16px] leading-7">{jobpost.description}</p>
 				<div className="flex gap-2 items-center h-[31px]">
 					<div className="bg-green-100 text-[#56CDAD] text-[12px] font-semibold w-[76px] h-full flex items-center justify-center rounded-full">
 						In Person

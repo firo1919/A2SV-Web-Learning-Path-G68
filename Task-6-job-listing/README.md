@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Job Listing Web Application
 
-## Getting Started
+A modern web application for browsing and exploring job opportunities, built with Next.js and TypeScript.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   Browse a curated list of job postings
+-   View detailed job descriptions and requirements
+-   Filter jobs by categories and skills
+-   Responsive design for desktop and mobile
+-   Company information and onboarding event details
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Previews
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   ### /joblist
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    ![Job Listing Preview](previews/landingpage.png)
 
-## Learn More
+-   ### /joblist/1
+    ![Job Listing Preview](previews/jobdescription.png)
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    ```bash
+    git clone https://github.com/firo1919/A2SV-Web-Learning-Path-G68.git
+    ```
 
-## Deploy on Vercel
+    ```bash
+    cd  A2SV-Web-Learning-Path-G68/Task-6-job-listing/
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+    npm install
+    ```
+
+3. **Run json server:**
+
+    ```bash
+    npx json-server src/data/jobs.json -p 3001
+    ```
+
+4. **Environment variables**
+    - change `.example.env` to `.env`
+5. **Run the development server:**
+
+    ```bash
+    npm run dev
+    ```
+
+6. **Open your browser:**
+   Visit [http://localhost:3000/joblist](http://localhost:3000) to view the app.
+
+## Project Structure
+
+-   `src/app/` - Main application pages and layout
+-   `src/components/` - Reusable UI components
+-   `src/data/jobs.json` - Job postings data
+-   `src/services/` - Service functions for data handling
+-   `src/types/` - TypeScript type definitions
+
+## Technologies Used
+
+-   Next.js
+-   React
+-   TypeScript
+-   CSS Modules
