@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type Dispatch, type SetStateAction } from "react";
+import { useEffect, useState, type ChangeEvent, type Dispatch, type SetStateAction } from "react";
 import { FaCalendar, FaPen, FaRegTrashAlt } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import TodoService from "../services/todoservice";
@@ -13,9 +13,13 @@ function TodoItem({ todo, setTodos }: Props) {
 	const [editing, setEditing] = useState(false);
 	const [value, setValue] = useState(todo.description);
 
+	useEffect(() => {
+		setValue(todo.description);
+	}, [todo.description]);
+
 	function handleCheckClick() {
-		todo.isFinished = !todo.isFinished;
-		const newtodo = TodoService.updateTodo(todo);
+		const updatedTodo = { ...todo, isFinished: !todo.isFinished };
+		const newtodo = TodoService.updateTodo(updatedTodo);
 		setTodos((prev) => prev.map((t) => (t.id === newtodo?.id ? newtodo : t)));
 	}
 
@@ -25,13 +29,15 @@ function TodoItem({ todo, setTodos }: Props) {
 	}
 
 	function handleAccept() {
-		if (value) {
-			todo.description = value;
-			const newtodo = TodoService.updateTodo(todo);
-			setTodos((prev) => prev.map((t) => (t.id === newtodo?.id ? newtodo : t)));
+		if (!value.trim()) {
+			setValue(todo.description);
+			setEditing(false);
+			return;
 		}
+		const updatedTodo = { ...todo, description: value };
+		const newtodo = TodoService.updateTodo(updatedTodo);
+		setTodos((prev) => prev.map((t) => (t.id === newtodo?.id ? newtodo : t)));
 		setEditing(false);
-		setValue(todo.description);
 	}
 
 	function handleSkip() {
@@ -46,10 +52,10 @@ function TodoItem({ todo, setTodos }: Props) {
 
 	return (
 		<div className="todo-item">
-			<input type="checkbox" checked={todo.isFinished} onClick={handleCheckClick} className="checkbox" />
+			<input type="checkbox" checked={todo.isFinished} onChange={handleCheckClick} className="checkbox" />
 			{editing ? (
 				<div className="todo-editor">
-					<input value={value} onChange={(e) => handleInputChange(e)} type="text" className="editor-input" />
+					<input value={value} onChange={handleInputChange} type="text" className="editor-input" />
 					<button onClick={handleAccept} className="accept-edit">
 						<FaCheck />
 					</button>
