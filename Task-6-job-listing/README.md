@@ -6,9 +6,7 @@ A modern web application for browsing and exploring job opportunities, built wit
 
 -   Browse a curated list of job postings
 -   View detailed job descriptions and requirements
--   Filter jobs by categories and skills
 -   Responsive design for desktop and mobile
--   Company information and onboarding event details
 
 ## Previews
 
@@ -67,4 +65,4 @@ A modern web application for browsing and exploring job opportunities, built wit
 -   Next.js
 -   React
 -   TypeScript
--   CSS Modules
+-   Tailwindcss
