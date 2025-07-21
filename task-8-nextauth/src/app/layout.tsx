@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Epilogue } from "next/font/google";
 
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 
 const epilogue = Epilogue({
@@ -16,7 +17,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en">
-			<body className={`${epilogue.className}`}>{children}</body>
+			<SessionProvider>
+				<body className={`${epilogue.className}`}>{children}</body>
+			</SessionProvider>
 		</html>
 	);
 }

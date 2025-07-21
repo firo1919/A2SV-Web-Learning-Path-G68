@@ -1,3 +1,4 @@
+import { signIn } from "@/auth";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
@@ -13,10 +14,21 @@ function RegistrationPage() {
 		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
 			<div className="w-180 h-212.5 bg-white flex flex-col items-center justify-center gap-6 px-39 py-8.5">
 				<p className={`${poppins.className} text-[32px] text-[#25324B]`}>Sign Up Today!</p>
-				<button className="flex items-center justify-center h-12.5 gap-3 rounded-md border border-[#CCCCF5] w-full">
-					<FcGoogle className="text-xl" />
-					<p className="text-[#4640DE] text-[16px] font-bold cursor-pointer">Sign Up with Google!</p>
-				</button>
+				<form
+					action={async () => {
+						"use server";
+						await signIn("google", { redirectTo: "/" });
+					}}
+					className="w-full"
+				>
+					<button
+						type="submit"
+						className="flex items-center justify-center h-12.5 gap-3 rounded-md border border-[#CCCCF5] w-full"
+					>
+						<FcGoogle className="text-xl" />
+						<p className="text-[#4640DE] text-[16px] font-bold cursor-pointer">Sign Up with Google!</p>
+					</button>
+				</form>
 				<div className="flex gap-4 items-center justify-between w-full">
 					<div className="w-full bg-[#D6DDEB] h-[1px]"></div>
 					<p className="shrink-0 text-[#202430] font-normal text-[16px] opacity-50">Or Sign Up with Email</p>
