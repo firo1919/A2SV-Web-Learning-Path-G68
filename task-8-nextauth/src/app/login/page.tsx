@@ -1,5 +1,7 @@
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { FcGoogle } from "react-icons/fc";
+import { signInUserWithGoogle } from "../actions";
 import SignInForm from "../components/SignInForm";
 
 const poppins = Poppins({
@@ -9,8 +11,8 @@ const poppins = Poppins({
 });
 function LoginPage() {
 	return (
-		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
-			<div className="w-180 h-212.5 bg-white flex flex-col items-center justify-center gap-6 px-39 py-8.5">
+		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-full bottom-0 flex items-center justify-center">
+			<div className="md:w-180 md:px-39 md:py-8.5 lg:w-160 lg:px-30 lg:py-6 2xl:w-180 2xl:px-39 2xl:py-8.5 bg-white flex flex-col items-center justify-center gap-6 ">
 				<p className={`${poppins.className} text-[32px] text-[#25324B]`}>Welcome Back!</p>
 				<div className="flex gap-4 items-center justify-between w-full">
 					<div className=" bg-[#D6DDEB] h-[1px] flex-1/4"></div>
@@ -18,6 +20,15 @@ function LoginPage() {
 					<div className=" bg-[#D6DDEB] h-[1px] flex-1/4"></div>
 				</div>
 				<SignInForm />
+				<form action={signInUserWithGoogle} className="w-full">
+					<button
+						type="submit"
+						className="flex items-center justify-center h-12.5 gap-3 rounded-md border border-[#CCCCF5] w-full"
+					>
+						<FcGoogle className="text-xl" />
+						<p className="text-[#4640DE] text-[16px] font-bold cursor-pointer">Sign In with Google!</p>
+					</button>
+				</form>
 				<div className="w-full flex gap-2">
 					<p className="text-[#202430] text-[16px] font-normal opacity-70">Dont have an account?</p>
 					<Link href={"/register"} className="text-[#4640DE] text-[16px] font-semibold">

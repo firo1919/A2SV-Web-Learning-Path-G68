@@ -1,26 +1,26 @@
-import { signIn } from "@/auth";
+import { auth } from "@/auth";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { signInUserWithGoogle } from "../actions";
 import RegisterForm from "../components/RegisterForm";
-
 const poppins = Poppins({
 	display: "swap",
 	subsets: ["latin"],
 	weight: "900",
 });
-function RegistrationPage() {
+
+async function RegistrationPage() {
+	const session = await auth();
+	if (session?.user) {
+		redirect("/");
+	}
 	return (
 		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
 			<div className="w-180 h-212.5 bg-white flex flex-col items-center justify-center gap-6 px-39 py-8.5">
 				<p className={`${poppins.className} text-[32px] text-[#25324B]`}>Sign Up Today!</p>
-				<form
-					action={async () => {
-						"use server";
-						await signIn("google", { redirectTo: "/" });
-					}}
-					className="w-full"
-				>
+				<form action={signInUserWithGoogle} className="w-full">
 					<button
 						type="submit"
 						className="flex items-center justify-center h-12.5 gap-3 rounded-md border border-[#CCCCF5] w-full"

@@ -1,13 +1,14 @@
 import { auth, signOut } from "@/auth";
 import Image from "next/image";
-
 export default async function Home() {
 	const session = await auth();
 	return (
 		<div className="w-full flex justify-between items-center px-8 py-6 bg-blue-300">
 			<div className="flex gap-4 items-center">
-				<Image src={`${session?.user?.image}`} alt="" width={50} height={50} className="rounded-full" />
-				<p>{session?.user?.name} </p>
+				{session?.user?.image && (
+					<Image src={`${session?.user?.image}`} alt="" width={50} height={50} className="rounded-full" />
+				)}
+				<p className="capitalize">{session?.user?.name} </p>
 			</div>
 			<form
 				action={async () => {
