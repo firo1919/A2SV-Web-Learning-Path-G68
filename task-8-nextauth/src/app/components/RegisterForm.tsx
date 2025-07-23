@@ -44,7 +44,7 @@ function RegisterForm() {
 
 	return (
 		<div className="w-full relative">
-			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5.5">
+			<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col lg:grid lg:grid-cols-2 gap-3 xl:gap-5.5">
 				<div className="flex flex-col gap-1">
 					<label htmlFor="fullname" className="text-[#515B6F] text-[16px] font-semibold">
 						Full Name
@@ -52,7 +52,7 @@ function RegisterForm() {
 					<input
 						type="text"
 						id="fullname"
-						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-3 px-4"
+						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-1 px-2 md:py-3 md:px-4"
 						placeholder="Enter your full name"
 						{...register("fullname")}
 					/>
@@ -64,7 +64,7 @@ function RegisterForm() {
 					</label>
 					<input
 						type="text"
-						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-3 px-4"
+						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-1 px-2 md:py-3 md:px-4"
 						id="email"
 						placeholder="Enter email address"
 						{...register("email")}
@@ -77,7 +77,7 @@ function RegisterForm() {
 					</label>
 					<input
 						type="password"
-						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-3 px-4"
+						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-1 px-2 md:py-3 md:px-4"
 						id="password"
 						placeholder="Enter password"
 						{...register("password")}
@@ -90,7 +90,7 @@ function RegisterForm() {
 					</label>
 					<input
 						type="text"
-						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-3 px-4"
+						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-1 px-2 md:py-3 md:px-4"
 						id="confirm-password"
 						placeholder="Enter password"
 						{...register("confirmPass")}
@@ -99,7 +99,7 @@ function RegisterForm() {
 						<div className="text-red-600 font-semibold">{errors.confirmPass.message}</div>
 					)}
 				</div>
-				<button className="w-full bg-blue-700 hover:bg-blue-800 active:bg-blue-600 py-3 px-6 rounded-[80px] text-white font-bold text-[16px] cursor-pointer">
+				<button className="w-full lg:col-span-2 bg-blue-700 hover:bg-blue-800 active:bg-blue-600 py-3 px-6 rounded-[80px] text-white font-bold text-[16px] cursor-pointer">
 					Continue
 				</button>
 			</form>

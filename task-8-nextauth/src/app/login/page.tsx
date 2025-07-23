@@ -12,7 +12,7 @@ const poppins = Poppins({
 function LoginPage() {
 	return (
 		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-full bottom-0 flex items-center justify-center">
-			<div className="md:w-180 md:px-39 md:py-8.5 lg:w-160 lg:px-30 lg:py-6 2xl:w-180 2xl:px-39 2xl:py-8.5 bg-white flex flex-col items-center justify-center gap-6 ">
+			<div className="w-full h-full px-8 py-6 md:w-140 md:px-20 md:h-auto lg:w-160 lg:px-30 lg:py-6 lg:h-auto 2xl:w-180 2xl:px-39 2xl:py-8.5 2xl:h-auto bg-white flex flex-col items-center justify-center gap-6 ">
 				<p className={`${poppins.className} text-[32px] text-[#25324B]`}>Welcome Back!</p>
 				<div className="flex gap-4 items-center justify-between w-full">
 					<div className=" bg-[#D6DDEB] h-[1px] flex-1/4"></div>

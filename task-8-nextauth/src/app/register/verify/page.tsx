@@ -64,6 +64,10 @@ function VerificationPage() {
 		try {
 			const response = await resendOtp(resend).unwrap();
 			console.log(response);
+			setRetryOtp(false);
+			const newTime = new Date();
+			newTime.setMinutes(newTime.getMinutes() + 5);
+			restart(newTime);
 		} catch (error) {
 			toast("Couldnt generate new otp", {
 				draggable: false,
@@ -74,18 +78,14 @@ function VerificationPage() {
 			console.log("error occured", error);
 			setOtp("0000");
 		}
-		setRetryOtp(false);
-		const newTime = new Date();
-		newTime.setMinutes(newTime.getMinutes() + 5);
-		restart(newTime);
 		setNewOtp(false);
 	}
 
 	return (
-		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
-			<div className="w-180 h-212.5 bg-white flex flex-col items-center justify-center gap-11.5 px-39 py-8.5">
+		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-screen bottom-0 flex items-center justify-center">
+			<div className="w-full h-full px-8 py-6 md:w-140 md:px-20 md:h-auto lg:w-160 lg:px-30 lg:py-6 lg:h-auto 2xl:w-180 2xl:px-39 2xl:py-8.5 2xl:h-auto bg-white flex flex-col items-center justify-center gap-6">
 				<p className={`${poppins.className} text-[32px] text-[#25324B]`}>Verify Email</p>
-				<p className="text-[#7C8493] text-[16px] font-normal">
+				<p className="text-[#7C8493] text-[16px] font-normal text-center">
 					We&apos;ve sent a verification code to the email address you provided. To complete the verification
 					process, please enter the code here.
 				</p>
@@ -111,7 +111,7 @@ function VerificationPage() {
 						</button>
 					) : (
 						<>
-							<p className="text-[#7C8493] text-[16px] font-normal">
+							<p className="text-[#7C8493] text-[16px] font-normal text-center">
 								You can request to Resend code in{" "}
 								<span className="text-blue-700">{`${minutes}:${seconds}`}</span>
 							</p>

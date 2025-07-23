@@ -17,8 +17,8 @@ async function RegistrationPage() {
 		redirect("/");
 	}
 	return (
-		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
-			<div className="w-180 h-212.5 bg-white flex flex-col items-center justify-center gap-6 px-39 py-8.5">
+		<div className="bg-[#F5F5F5] fixed top-0 left-0 w-screen bottom-0 flex items-center justify-center">
+			<div className="w-full h-full px-8 py-2 md:w-140 md:px-20 md:h-auto lg:w-180 lg:px-30 lg:py-6 lg:h-auto 2xl:w-180 2xl:px-39 2xl:py-8.5 2xl:h-auto bg-white flex flex-col items-center justify-center gap-3  ">
 				<p className={`${poppins.className} text-[32px] text-[#25324B]`}>Sign Up Today!</p>
 				<form action={signInUserWithGoogle} className="w-full">
 					<button

@@ -27,17 +27,35 @@ A simple authentication system built with Next.js and NextAuth, featuring email 
 
 ## Previews
 
-![Register Page](previvews/register-preview.png)
-![Login Page](previvews/login-preview.png)
-![Email Verification](previvews/verify-preview.png)
+### Pages
+
+-   **/register**
+    ![Register Page](previews/register-preview.png)
+-   **/login**
+    ![Login Page](previews/login-preview.png)
+-   **/register/verify**
+    ![Email Verification](previews/verify-preview.png)
+
+### Responsive
+
+-   **Mobile**
+    ![Mobile](previews/mobile.png)
+-   **Tablet**
+    ![Mobile](previews/tablet.png)
+-   **Desktop**
+    ![Mobile](previews/desktop.png)
 
 ## Usage
 
 1. Clone the repository:
+
     ```bash
-    git clone <repo-url>
-    cd task-8-nextauth
+    git clone https://github.com/firo1919/A2SV-Web-Learning-Path-G68.git
+
+    cd A2SV-Web-Learning-Path-G68/task-8-nextauth/
+
     ```
+
 2. Install dependencies:
     ```bash
     npm install
