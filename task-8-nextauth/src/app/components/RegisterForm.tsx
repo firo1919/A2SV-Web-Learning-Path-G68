@@ -89,7 +89,7 @@ function RegisterForm() {
 						Confirm Password
 					</label>
 					<input
-						type="text"
+						type="password"
 						className="w-full border-4 border-[#D6DDEB] focus:outline-none focus:border-blue-700 rounded-[7px] py-1 px-2 md:py-3 md:px-4"
 						id="confirm-password"
 						placeholder="Enter password"
