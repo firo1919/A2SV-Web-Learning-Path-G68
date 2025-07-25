@@ -26,6 +26,7 @@ function RegisterForm() {
 			email: data.email,
 			password: data.password,
 			confirmPassword: data.confirmPass,
+			role: "user",
 		};
 		try {
 			const response = await registerUser(newUser).unwrap();

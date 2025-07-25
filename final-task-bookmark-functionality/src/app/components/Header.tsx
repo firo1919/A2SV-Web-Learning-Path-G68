@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/auth";
 import Image from "next/image";
+import Link from "next/link";
 
 async function Header() {
 	const session = await auth();
@@ -12,19 +13,27 @@ async function Header() {
 					)}
 					<p className="capitalize">{session?.user?.name} </p>
 				</div>
-				<form
-					action={async () => {
-						"use server";
-						await signOut({ redirectTo: "/login" });
-					}}
-				>
-					<button
-						type="submit"
-						className=" bg-blue-700 hover:bg-blue-800 active:bg-blue-600 py-3 px-6 rounded-[80px] text-white font-bold text-[16px] cursor-pointer"
+				<div className="flex gap-6 items-center">
+					<Link className="font-bold hover:text-white" href="/joblist">
+						Job-List
+					</Link>
+					<Link className="font-bold hover:text-white" href="/bookmarks">
+						Bookmarks
+					</Link>
+					<form
+						action={async () => {
+							"use server";
+							await signOut({ redirectTo: "/login" });
+						}}
 					>
-						Sign out
-					</button>
-				</form>
+						<button
+							type="submit"
+							className=" bg-blue-700 hover:bg-blue-800 active:bg-blue-600 py-3 px-6 rounded-[80px] text-white font-bold text-[16px] cursor-pointer"
+						>
+							Sign out
+						</button>
+					</form>
+				</div>
 			</div>
 		);
 	}

@@ -1,6 +1,10 @@
-import JobListImage from "@/../public/job1.png";
+"use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { useCreateBookmarkMutation, useDeleteBookmarkMutation } from "../store/features/api/bookmarksSlice";
 import type JobPost from "../types/jobPost";
 import Category from "./Category";
 import JopPlace from "./JopPlace";
@@ -11,16 +15,47 @@ interface Props {
 
 function JobListCard({ jobpost }: Props) {
 	const categories = [];
+	const { data: session } = useSession();
+	const [createBookmark] = useCreateBookmarkMutation();
+	const [deleteBookmark] = useDeleteBookmarkMutation();
+	const [bookmarked, setBookmarked] = useState(jobpost.isBookmarked);
+
+	useEffect(() => {
+		setBookmarked(jobpost.isBookmarked);
+	}, [jobpost.isBookmarked]);
+
+	async function handleCreateBookmark() {
+		try {
+			const response = await createBookmark(jobpost.id).unwrap();
+			console.log("successfull", response);
+			setBookmarked(true);
+		} catch (error) {
+			console.log("rejected", error);
+		}
+	}
+
+	async function handleDeleteBookmark() {
+		try {
+			const response = await deleteBookmark(jobpost.id).unwrap();
+			console.log("successfull", response);
+			setBookmarked(false);
+		} catch (error) {
+			console.log("rejected", error);
+		}
+	}
+
 	for (let i = 0; i < 2 && i < jobpost.categories.length; i += 1) {
 		categories.push(jobpost.categories[i]);
 	}
 	return (
-		<Link
-			href={`/joblist/${jobpost.id}`}
-			className="flex p-6 rounded-[30px] border border-[#D6DDEB] hover:-translate-y-1 hover:shadow-md hover:scale-105 transition delay-150 duration-300"
-		>
+		<div className="relative flex p-6 rounded-[30px] border border-[#D6DDEB] hover:-translate-y-1 hover:shadow-md hover:scale-105 transition delay-150 duration-300">
 			<div className="w-[66px] mr-6 relative shrink-0">
-				<Image src={JobListImage} fill alt="company image" className=" object-contain object-top" />
+				<Image
+					src={jobpost.logoUrl || "/job1.png"}
+					fill
+					alt="company image"
+					className=" object-contain object-top"
+				/>
 			</div>
 			<div className="flex flex-col gap-2">
 				<p className="text-xl font-semibold">{jobpost.title}</p>
@@ -40,7 +75,18 @@ function JobListCard({ jobpost }: Props) {
 					</div>
 				</div>
 			</div>
-		</Link>
+			{session && (
+				<button
+					onClick={bookmarked ? handleDeleteBookmark : handleCreateBookmark}
+					className={`absolute right-5 top-5 text-2xl border-2 border-orange-300  p-2 rounded-full outline-none hover:bg-orange-100 cursor-pointer ${
+						!bookmarked ? "text-gray-400" : "text-orange-300"
+					}`}
+				>
+					<FaStar className="" />
+				</button>
+			)}
+			<Link href={`/joblist/${jobpost.id}`} className="absolute top-0 left-0 bottom-0 w-3/4"></Link>
+		</div>
 	);
 }
 export default JobListCard;

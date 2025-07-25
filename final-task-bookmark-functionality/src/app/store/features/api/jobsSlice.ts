@@ -6,12 +6,14 @@ const baseUrl = `/api/jobposts/`;
 export const jobs = createApi({
 	reducerPath: "jobsapi",
 	baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+	tagTypes: ["Jobs"],
 	endpoints: (builder) => ({
 		getJobPosts: builder.query<JobPost[], void>({
 			query: () => ({
 				url: "",
 				method: "GET",
 			}),
+			providesTags: ["Jobs"],
 		}),
 		getJobPost: builder.query<JobPost, string>({
 			query: (jobId: string) => ({

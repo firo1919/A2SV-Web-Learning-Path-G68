@@ -12,7 +12,7 @@ const poppins = Poppins({
 	weight: "900",
 });
 
-export default function Home() {
+export default function JoblistingPage() {
 	const { data: jobPosts = [], isLoading, isSuccess, isError, error } = useGetJobPostsQuery();
 	if (isError) {
 		console.log(error);

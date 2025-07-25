@@ -19,12 +19,15 @@ interface LoginResponse {
 	};
 }
 
-// Ensure your environment variable is correctly set
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+const baseUrl = process.env.API_URL;
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [
-		Google,
+		Google({
+			profile(profile) {
+				return { role: profile.role ?? "user", ...profile };
+			},
+		}),
 		Credentials({
 			credentials: {
 				email: {
@@ -38,7 +41,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 					placeholder: "Enter password",
 				},
 			},
-
 			authorize: async (credentials) => {
 				console.log("Attempting authorization with credentials:", credentials);
 				try {
@@ -56,7 +58,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 						id: responseData.data.id,
 						name: responseData.data.name,
 						email: responseData.data.email,
-						image: responseData.data.profilePicUrl || null,
+						image: responseData.data.profilePicUrl || "",
 						accessToken: responseData.data.accessToken,
 						refreshToken: responseData.data.refreshToken,
 						role: responseData.data.role,
@@ -78,10 +80,39 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			console.log("Checking authorization status:", auth);
 			return !!auth?.user;
 		},
+		jwt({ token, user }) {
+			if (user) token.role = user.role;
+			if (user) token.id = user.id;
+			if (user) token.name = user.name;
+			if (user) token.email = user.email;
+			if (user) token.image = user.image;
+			if (user) token.accessToken = user.accessToken;
+			if (user) token.refreshToken = user.refreshToken;
+			if (user) token.role = user.role;
+			if (user) token.profileComplete = user.profileComplete;
+			if (user) token.profileStatus = user.profileStatus;
+			return token;
+		},
+		session({ session, token }) {
+			session.user.role = token.role;
+			session.user.id = token.id;
+			session.user.name = token.name;
+			session.user.email = token.email;
+			session.user.image = token.image;
+			session.user.accessToken = token.accessToken;
+			session.user.refreshToken = token.refreshToken;
+			session.user.role = token.role;
+			session.user.profileComplete = token.profileComplete;
+			session.user.profileStatus = token.profileStatus;
+			return session;
+		},
 	},
 	pages: {
 		signIn: "/login",
 		newUser: "/register",
+	},
+	session: {
+		strategy: "jwt",
 	},
 });
 
