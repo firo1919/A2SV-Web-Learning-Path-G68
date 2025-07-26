@@ -1,5 +1,6 @@
 import { Bookmark } from "@/app/types/bookmarks";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { jobs } from "./jobsSlice";
 
 const baseUrl = `/api/bookmarks/`;
 
@@ -22,7 +23,12 @@ export const bookmarks = createApi({
 				method: "POST",
 				body: "",
 			}),
-			invalidatesTags: ["Post", "Jobs"],
+			invalidatesTags: ["Post"],
+			onQueryStarted: (arg, api) => {
+				api.queryFulfilled.then(() => {
+					api.dispatch(jobs.util.invalidateTags(["Jobs"]));
+				});
+			},
 		}),
 		deleteBookmark: builder.mutation<Bookmark, string>({
 			query: (eventId) => ({
@@ -30,7 +36,12 @@ export const bookmarks = createApi({
 				method: "DELETE",
 				body: "",
 			}),
-			invalidatesTags: ["Post", "Jobs"],
+			invalidatesTags: ["Post"],
+			onQueryStarted: (arg, api) => {
+				api.queryFulfilled.then(() => {
+					api.dispatch(jobs.util.invalidateTags(["Jobs"]));
+				});
+			},
 		}),
 	}),
 });

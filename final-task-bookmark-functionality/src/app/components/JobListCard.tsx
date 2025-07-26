@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { toast } from "react-toastify";
 import { useCreateBookmarkMutation, useDeleteBookmarkMutation } from "../store/features/api/bookmarksSlice";
 import type JobPost from "../types/jobPost";
 import Category from "./Category";
@@ -19,29 +20,48 @@ function JobListCard({ jobpost }: Props) {
 	const [createBookmark] = useCreateBookmarkMutation();
 	const [deleteBookmark] = useDeleteBookmarkMutation();
 	const [bookmarked, setBookmarked] = useState(jobpost.isBookmarked);
+	const [disableBookmarkBtn, setDisableBookmarkBtn] = useState(false);
 
 	useEffect(() => {
 		setBookmarked(jobpost.isBookmarked);
 	}, [jobpost.isBookmarked]);
 
 	async function handleCreateBookmark() {
+		setDisableBookmarkBtn(true);
 		try {
 			const response = await createBookmark(jobpost.id).unwrap();
 			console.log("successfull", response);
 			setBookmarked(true);
+			toast("Bookmark created successfully", {
+				draggable: false,
+				theme: "colored",
+				hideProgressBar: true,
+				type: "success",
+			});
 		} catch (error) {
 			console.log("rejected", error);
+			toast("Bookmark not created", { draggable: false, theme: "colored", hideProgressBar: true, type: "error" });
 		}
+		setDisableBookmarkBtn(false);
 	}
 
 	async function handleDeleteBookmark() {
+		setDisableBookmarkBtn(true);
 		try {
 			const response = await deleteBookmark(jobpost.id).unwrap();
 			console.log("successfull", response);
+			toast("Bookmark removed successfully", {
+				draggable: false,
+				theme: "colored",
+				hideProgressBar: true,
+				type: "success",
+			});
 			setBookmarked(false);
 		} catch (error) {
 			console.log("rejected", error);
+			toast("Bookmark not removed", { draggable: false, theme: "colored", hideProgressBar: true, type: "error" });
 		}
+		setDisableBookmarkBtn(false);
 	}
 
 	for (let i = 0; i < 2 && i < jobpost.categories.length; i += 1) {
@@ -77,6 +97,7 @@ function JobListCard({ jobpost }: Props) {
 			</div>
 			{session && (
 				<button
+					disabled={disableBookmarkBtn}
 					onClick={bookmarked ? handleDeleteBookmark : handleCreateBookmark}
 					className={`absolute right-5 top-5 text-2xl border-2 border-orange-300  p-2 rounded-full outline-none hover:bg-orange-100 cursor-pointer ${
 						!bookmarked ? "text-gray-400" : "text-orange-300"
