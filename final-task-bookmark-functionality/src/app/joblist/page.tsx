@@ -44,6 +44,7 @@ export default function JoblistingPage() {
 					<div
 						className="absolute top-0 left-0 mt-20 right-0 flex items-center justify-center
                         bg-white opacity-50"
+						data-testid="loading"
 					>
 						<ImSpinner2 className="text-7xl animate-spin" />
 					</div>

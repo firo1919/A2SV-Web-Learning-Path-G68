@@ -68,7 +68,10 @@ function JobListCard({ jobpost }: Props) {
 		categories.push(jobpost.categories[i]);
 	}
 	return (
-		<div className="relative flex p-6 rounded-[30px] border border-[#D6DDEB] hover:-translate-y-1 hover:shadow-md hover:scale-105 transition delay-150 duration-300">
+		<div
+			data-testid="jobcontainer"
+			className="relative flex p-6 rounded-[30px] border border-[#D6DDEB] hover:-translate-y-1 hover:shadow-md hover:scale-105 transition delay-150 duration-300"
+		>
 			<div className="w-[66px] mr-6 relative shrink-0">
 				<Image
 					src={jobpost.logoUrl || "/job1.png"}
@@ -98,6 +101,7 @@ function JobListCard({ jobpost }: Props) {
 			{session && (
 				<button
 					disabled={disableBookmarkBtn}
+					data-testid="bookmarkbtn"
 					onClick={bookmarked ? handleDeleteBookmark : handleCreateBookmark}
 					className={`absolute right-5 top-5 text-2xl border-2 border-orange-300  p-2 rounded-full outline-none hover:bg-orange-100 cursor-pointer ${
 						!bookmarked ? "text-gray-400" : "text-orange-300"

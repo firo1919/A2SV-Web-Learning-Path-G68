@@ -114,6 +114,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	session: {
 		strategy: "jwt",
 	},
+	trustHost: true,
 });
 
 async function loginUser(email: unknown, password: unknown): Promise<LoginResponse | null> {

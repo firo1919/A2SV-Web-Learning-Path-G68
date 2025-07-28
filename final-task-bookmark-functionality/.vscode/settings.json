@@ -1,0 +1,4 @@
+{
+	"jest.rootPath": "src/",
+	"jest.enable": true
+}

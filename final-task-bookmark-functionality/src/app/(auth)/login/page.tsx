@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { Suspense } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { signInUserWithGoogle } from "../../actions";
 import SignInForm from "../../components/SignInForm";
@@ -18,7 +19,9 @@ function LoginPage() {
 				<p className=" grow"></p>
 				<div className=" bg-[#D6DDEB] h-[1px] flex-1/4"></div>
 			</div>
-			<SignInForm />
+			<Suspense>
+				<SignInForm />
+			</Suspense>
 			<form action={signInUserWithGoogle} className="w-full">
 				<button
 					type="submit"

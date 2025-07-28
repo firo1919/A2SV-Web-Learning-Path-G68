@@ -18,7 +18,7 @@ const poppins = Poppins({
 });
 
 function JobDetail({ jobId }: Props) {
-	const { data: jobPost, isLoading, isSuccess, isError, error } = useGetJobPostQuery(jobId);
+	const { data: jobPost, isSuccess, isError, error } = useGetJobPostQuery(jobId);
 	if (isError) {
 		console.log(error);
 	}

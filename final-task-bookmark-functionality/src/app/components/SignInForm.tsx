@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ImSpinner2 } from "react-icons/im";
 import { toast, ToastContainer } from "react-toastify";
@@ -20,16 +20,14 @@ function SignInForm() {
 	const [isLoading, setIsLoading] = useState(false);
 	const error = useSearchParams().get("error");
 
-	useEffect(() => {
-		if (error) {
-			toast("Login failed, Invalid credentials", {
-				draggable: false,
-				theme: "colored",
-				hideProgressBar: true,
-				type: "error",
-			});
-		}
-	}, [error]);
+	if (error) {
+		toast("Login failed, Invalid credentials", {
+			draggable: false,
+			theme: "colored",
+			hideProgressBar: true,
+			type: "error",
+		});
+	}
 
 	async function onSubmit(data: FormFields) {
 		setIsLoading(true);
@@ -80,6 +78,7 @@ function SignInForm() {
 				</div>
 				<button
 					type="submit"
+					name="login"
 					className="w-full bg-blue-700 hover:bg-blue-800 active:bg-blue-600 py-3 px-6 rounded-[80px] text-white font-bold text-[16px] cursor-pointer"
 				>
 					Login
@@ -90,6 +89,7 @@ function SignInForm() {
 				<div
 					className="absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center
                         bg-white opacity-50"
+					id="loading"
 				>
 					<ImSpinner2 className="text-7xl animate-spin" />
 				</div>

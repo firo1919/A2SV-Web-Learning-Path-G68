@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Epilogue } from "next/font/google";
 
 import { SessionProvider } from "next-auth/react";
-import { AppProvider } from "./components/AppProvider";
+import AppProvider from "./components/AppProvider";
 import Header from "./components/Header";
 import "./globals.css";
 

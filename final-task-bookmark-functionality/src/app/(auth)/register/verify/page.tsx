@@ -3,7 +3,7 @@ import { useResendOtpMutation, useVerifyUserMutation } from "@/app/store/feature
 import { useSession } from "next-auth/react";
 import { Poppins } from "next/font/google";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, Suspense, useState } from "react";
 import { ImSpinner2 } from "react-icons/im";
 import OTPInput from "react-otp-input";
 import { useTimer } from "react-timer-hook";
@@ -15,7 +15,7 @@ const poppins = Poppins({
 	weight: "900",
 });
 
-function VerificationPage() {
+function Verification() {
 	const email = useSearchParams().get("email");
 	const { data: session } = useSession();
 	if (session?.user || !email) {
@@ -139,4 +139,10 @@ function VerificationPage() {
 		</div>
 	);
 }
-export default VerificationPage;
+export default function VerificationPage() {
+	return (
+		<Suspense>
+			<Verification />
+		</Suspense>
+	);
+}
