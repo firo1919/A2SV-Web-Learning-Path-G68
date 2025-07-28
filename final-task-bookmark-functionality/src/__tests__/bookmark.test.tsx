@@ -71,6 +71,7 @@ describe("JobListCard bookmark functionality", () => {
 	});
 
 	it("calls createBookmark when the bookmark button is clicked and job is not bookmarked", async () => {
+		//ARRANGE
 		createBookmarkMock.mockReturnValue({ unwrap: () => Promise.resolve({}) });
 
 		render(
@@ -79,15 +80,18 @@ describe("JobListCard bookmark functionality", () => {
 			</AppProvider>
 		);
 
+		//ACT
 		const bookmarkBtn = screen.getByRole("button");
 		fireEvent.click(bookmarkBtn);
 
+		//ASSERT
 		await waitFor(() => {
 			expect(createBookmarkMock).toHaveBeenCalledWith(mockJobPost.id);
 		});
 	});
 
 	it("calls deleteBookmark when the bookmark button is clicked and job is bookmarked", async () => {
+		//ARRANGE
 		deleteBookmarkMock.mockReturnValue({ unwrap: () => Promise.resolve({}) });
 
 		render(
@@ -96,9 +100,11 @@ describe("JobListCard bookmark functionality", () => {
 			</AppProvider>
 		);
 
+		//ACT
 		const bookmarkBtn = screen.getByRole("button");
 		fireEvent.click(bookmarkBtn);
 
+		//ASSERT
 		await waitFor(() => {
 			expect(deleteBookmarkMock).toHaveBeenCalledWith(mockJobPost.id);
 		});
