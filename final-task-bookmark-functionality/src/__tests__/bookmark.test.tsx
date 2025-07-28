@@ -14,7 +14,7 @@ const deleteBookmarkMock = jest.fn();
 jest.mock("@/app/store/features/api/bookmarksSlice", () => ({
 	bookmarks: {
 		reducerPath: "bookmarksapi",
-		reducer: (state = {}) => state, // Can be a dummy function or actual reducer if you want partial behavior
+		reducer: (state = {}) => state,
 		middleware: () => (next: (action: unknown) => unknown) => (action: unknown) => next(action),
 	},
 	useCreateBookmarkMutation: () => [createBookmarkMock],
